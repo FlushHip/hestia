@@ -2,10 +2,10 @@
 
 namespace hestia
 {
-template <typename... Dummy>
+template<typename... Dummy>
 void ignore_unused(const Dummy & ...) {}
 
-template <typename... Dummy>
+template<typename... Dummy>
 void ignore_unused() {}
 
 } // namespace hestia

@@ -18,4 +18,7 @@ set_property(GLOBAL
     PROPERTY USE_FOLDERS ON
 )
 
-add_executable(HestiaHello ${CMAKE_CURRENT_SOURCE_DIR}/hello.cpp)
+add_executable(HestiaHello
+    ${CMAKE_CURRENT_SOURCE_DIR}/hello.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/base/core/event.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/base/core/event.cpp)
