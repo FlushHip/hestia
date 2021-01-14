@@ -2,10 +2,10 @@
 #include <thread>
 #include <chrono>
 
-#include "base/core/event.h"
-#include "base/core/ignore_unused.hpp"
+#include "hestia/base/core/event.h"
+#include "hestia/base/core/ignore_unused.hpp"
 
-hestia::base::Event event;
+hestia::base::core::Event event;
 
 void threadFunWait()
 {
@@ -35,6 +35,8 @@ void threadFunSignal()
 
 int main(int agrc, char **argv)
 {
+    int a = 1;
+    hestia::base::core::IgnoreUnused(a);
     std::cout << "hello hestia" << std::endl;
     std::thread td1(threadFunWait), td2(threadFunWait), td3(threadFunWait);
     std::thread td4(threadFunSignal);

@@ -15,10 +15,11 @@ message(STATUS
     "\n\thomepage: ${CMAKE_PROJECT_HOMEPAGE_URL}")
 
 set_property(GLOBAL
-    PROPERTY USE_FOLDERS ON
-)
+    PROPERTY USE_FOLDERS ON)
+set_property(GLOBAL
+    PROPERTY PREDEFINED_TARGETS_FOLDER "_other")
+set_property(GLOBAL
+    PROPERTY CMAKE_CXX_KNOWN_FEATURES cxx_std_17)
 
-add_executable(HestiaHello
-    ${CMAKE_CURRENT_SOURCE_DIR}/hello.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/base/core/event.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/base/core/event.cpp)
+add_subdirectory(hestia/base)
+add_subdirectory(examples/base)

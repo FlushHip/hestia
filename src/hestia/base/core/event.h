@@ -1,4 +1,8 @@
-#include "base/core/event.h"
+#pragma once
+
+#include <memory>
+#include <mutex>
+#include <chrono>
 
 namespace hestia
 {
@@ -6,18 +10,37 @@ namespace hestia
 namespace base
 {
 
-Event::Event()
-    : oneFlag_(false)
-    , allFlag_(false)
-{}
-
-void Event::Wait()
+namespace core
 {
-    std::unique_lock<std::mutex> lock(mutex_);
-    condition_.wait(lock, [this] { return oneFlag_ || allFlag_; });
-    oneFlag_ = false;
-}
-/*
+
+class Event
+{
+
+public:
+
+    Event();
+    ~Event() = default;
+
+    void Wait();
+    template<class Rep, class Period>
+    bool WaitFor(const std::chrono::duration<Rep, Period> & duration);
+
+    template<class Clock, class Duration>
+    bool WaitUntil(const std::chrono::time_point<Clock, Duration> & point);
+
+    void Reset();
+
+    void NotifyOne();
+    void NotifyAll();
+
+private:
+    std::mutex mutex_;
+    std::condition_variable condition_;
+
+    bool oneFlag_;
+    bool allFlag_;
+};
+
 template<class Rep, class Period>
 bool Event::WaitFor(const std::chrono::duration<Rep, Period> & duration)
 {
@@ -28,7 +51,6 @@ bool Event::WaitFor(const std::chrono::duration<Rep, Period> & duration)
     }
     return false;
 }
-*/
 
 template<class Clock, class Duration>
 bool Event::WaitUntil(const std::chrono::time_point<Clock, Duration> & point)
@@ -41,26 +63,7 @@ bool Event::WaitUntil(const std::chrono::time_point<Clock, Duration> & point)
     return false;
 }
 
-
-void Event::NotifyOne()
-{
-    std::lock_guard<std::mutex> lock(mutex_);
-    oneFlag_ = true;
-    condition_.notify_one();
-}
-
-void Event::NotifyAll()
-{
-    std::lock_guard<std::mutex> lock(mutex_);
-    allFlag_ = true;
-    condition_.notify_all();
-}
-
-void Event::Reset()
-{
-    std::lock_guard<std::mutex> lock(mutex_);
-    oneFlag_ = allFlag_ = false;
-}
+} // namespace core
 
 } // namespace base
 
