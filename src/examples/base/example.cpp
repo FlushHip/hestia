@@ -5,6 +5,8 @@
 #include "hestia/base/core/event.h"
 #include "hestia/base/core/ignore_unused.hpp"
 
+#include "hestia/base/string/charset.h"
+
 hestia::base::core::Event event;
 
 void threadFunWait()
@@ -45,5 +47,7 @@ int main(int agrc, char **argv)
     td2.join();
     td3.join();
     td4.join();
+
+    std::cout << hestia::base::string::UnicodeToANSI(L"³ÂÑôFlushHip") << std::endl;
     return 0;
 }

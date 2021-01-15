@@ -21,5 +21,9 @@ set_property(GLOBAL
 set_property(GLOBAL
     PROPERTY CMAKE_CXX_KNOWN_FEATURES cxx_std_17)
 
+if(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+
 add_subdirectory(hestia/base)
 add_subdirectory(examples/base)
