@@ -12,6 +12,12 @@ list(APPEND
     SRC_FILES
     ${HEADER_FILES} ${SOURCE_FILES})
 
+message(STATUS "build target : HestiaBase")
+
+foreach(filename ${SRC_FILES})
+    DIR_SOURCE_GROUP(${filename} ${CMAKE_CURRENT_SOURCE_DIR})
+endforeach()
+
 add_library(HestiaBase
     STATIC
     ${SRC_FILES})
