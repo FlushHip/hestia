@@ -3,6 +3,7 @@
 #include <memory>
 #include <mutex>
 #include <chrono>
+#include <condition_variable>
 
 namespace hestia
 {
