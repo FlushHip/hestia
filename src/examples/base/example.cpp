@@ -48,6 +48,6 @@ int main(int agrc, char **argv)
     td3.join();
     td4.join();
 
-    std::cout << hestia::base::string::UnicodeToANSI(L"³ÂÑôFlushHip") << std::endl;
+    std::cout << hestia::base::string::UnicodeToANSI(L"FlushHip") << std::endl;
     return 0;
 }
